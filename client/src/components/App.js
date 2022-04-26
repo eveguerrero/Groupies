@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
-
-//import Login from "./Login";
+import NavBar from "./NavBar";
+import Login from "./Login";
 
 
 
@@ -39,13 +39,14 @@ function App() {
   return (
    
         <>
+        <NavBar user={user} setUser={setUser} />
         <main>
           <Switch>
             
             
-            {/* <Route exact path="/login">
+            <Route exact path="/login">
               <Login onLogin={setUser} />
-            </Route> */}
+            </Route>
             
           </Switch>
           
