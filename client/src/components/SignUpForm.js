@@ -7,11 +7,10 @@ function SignUpForm({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [sellerTrue, setSellerTrue] = useState(false);
-  const [sellerFalse, setSellerFalse] = useState(true);
+  
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [seller, setSeller] = useState(false)
+  
   
   const history = useHistory();
 
@@ -29,8 +28,7 @@ function SignUpForm({ onLogin }) {
       body: JSON.stringify({
         username,
         password,
-        password_confirmation: passwordConfirmation,
-        seller
+        password_confirmation: passwordConfirmation
       }),
     }).then((r) => {
       setIsLoading(false);

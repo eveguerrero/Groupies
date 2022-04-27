@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :password_digest
       t.string :name
       t.string :image
-      t.text :description
+      t.text :bio
 
       t.timestamps
     end

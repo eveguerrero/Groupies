@@ -13,7 +13,7 @@ import './App.css';
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   
   const [errors, setErrors] = useState([])
 
@@ -33,6 +33,9 @@ function App() {
 
   
   
+  function updateUser(newName, newBio, newImage) {
+    setUser({ ...user, name: newName, bio: newBio});
+  }
 
   
   
@@ -49,7 +52,7 @@ function App() {
               <Login onLogin={setUser} />
             </Route>
             <Route path="/profile">
-            <Profile user={user}/>
+            <Profile user={user} updateUser={updateUser} />
             </Route>
 
           </Switch>
