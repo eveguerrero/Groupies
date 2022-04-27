@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "./Login";
+import Profile from "./Profile";
 
 
 
@@ -47,7 +48,10 @@ function App() {
             <Route exact path="/login">
               <Login onLogin={setUser} />
             </Route>
-            
+            <Route path="/profile">
+            <Profile user={user}/>
+            </Route>
+
           </Switch>
           
         </main>

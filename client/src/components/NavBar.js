@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 // import Button from "@mui/material/Button";
 import { Button } from "../styles";
+import Profile from "./Profile"
 
 
 function NavBar({ user, setUser, setItemToEdit }) {
@@ -41,10 +42,12 @@ function NavBar({ user, setUser, setItemToEdit }) {
           <Button variant="outline" onClick={handleLogoutClick}>
           Logout
           </Button>
+          <Button as={Link} to="/profile" exact>My Profile</Button> 
         </>
         :  
         <Button variant="outline" onClick={handleLogoutClick}>Logout</Button>
         }
+
       </Nav>
     </Wrapper>
   );
