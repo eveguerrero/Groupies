@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  rescue_from ActiveRecord::RecordInvalid,with: :render_unprocessable_entity
+  rescue_from ActiveRecord::RecordNotFound,with: :render_not_found
+
+
+
+  wrap_parameters format: []
+
+
     def index
       users = User.all
       render json: users
@@ -17,7 +25,7 @@ class UsersController < ApplicationController
     #GET /me
     def show
       if session[:user_id]
-        render json: User.find(session[:user_id]), status: :created
+        render json: User.find(session[:user_id]), status: :created  
       else
         render json: {error: "Not logged in"}, status: :unauthorized
       end
@@ -29,18 +37,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    p "*" * 50
-    p "user_id: #{params[:id]}"
-    p user_update_params
-    p "*" * 50
-
     user = User.find(session[:user_id])
       user.update!(user_update_params)
-      p "*" * 50
-      p user
-      p "*" * 50
       render json: user
-
   end
     
   def destroy
@@ -59,5 +58,12 @@ class UsersController < ApplicationController
 
   def user_update_params
     params.permit(:name, :bio, :image)
+  end
+  def render_unprocessable_entity invalid
+    render json: {errors: invalid.record.errors.full_messages},status: :unprocessable_entity
+  end
+
+  def render_not_found
+    render json: {error: "User not found"}, status: 404
   end
 end

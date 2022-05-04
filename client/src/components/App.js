@@ -4,6 +4,10 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import Profile from "./Profile";
+import ProfileSettings from "./ProfileSettings";
+import Home from "./Home";
+import './App.css';
+import GroupPage from "./GroupPage";
 
 
 
@@ -19,6 +23,8 @@ function App() {
 
   const history = useHistory()
 
+  const [groups, setGroups] = useState([])
+  const [issueRequest] = useState(false)
   // console.log(selectedCauses)
 
   useEffect(() => {
@@ -30,16 +36,29 @@ function App() {
     }
     );
   }, []);
+  
+  function loadsGroups(){
+    fetch("/groups")
+      .then(r => r.json())
+      .then(groups => {
+        setGroups(groups)
+        console.log(groups)
+      })
+  }
+
+  useEffect(() => {
+    loadsGroups()
+  }, [issueRequest])
 
   
   
-  function updateUser(newName, newBio, newImage) {
+  function updateUser(newName, newBio) {
     setUser({ ...user, name: newName, bio: newBio});
   }
 
   
   
-
+  if (!user) return <Login onLogin={setUser} />;
   return (
    
         <>
@@ -52,7 +71,16 @@ function App() {
               <Login onLogin={setUser} />
             </Route>
             <Route path="/profile">
-            <Profile user={user} updateUser={updateUser} />
+            <Profile user={user} updateUser={updateUser} setUser={setUser}/>
+            </Route>
+            <Route path="/profilesettings">
+            <ProfileSettings user={user} updateUser={updateUser} setUser={setUser}/>
+            </Route>
+            <Route path="/home">
+            <Home user={user} updateUser={updateUser} setUser={setUser}/>
+            </Route>
+            <Route path="/groups/:id">
+            <GroupPage user={user} updateUser={updateUser} setUser={setUser}/>
             </Route>
 
           </Switch>

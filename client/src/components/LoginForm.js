@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Error, Input, FormField, Label } from "../styles";
 import { Link, useHistory } from "react-router-dom";
 import { Redirect, Route } from "react-router-dom";
+import Home from "./Home"
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -28,8 +29,8 @@ function LoginForm({ onLogin }) {
         console.log("logged in");
         
         // history.push("/")
-        if (user) return history.push("/")
-        else return history.push("/")
+        if (user) return history.push("/home")
+        else return history.push("/login")
       })
       } else {
         r.json().then((err) => setErrors(err.errors));

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
 .App {
   text-align: center;
 }
@@ -48,4 +49,46 @@
   border-width: 5px;
   border-color: gray;
   border-style: outset;
+}
+.logo-img{
+  float: left;
+  margin: 0px 15px 15px 0px;
+}
+
+.group-list {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(2px + 1vmin);
+}
+
+.new-group-button {
+  align-items: right;
+  float: right;
+}
+
+.add-user-button {
+  align-items: right;
+  float: right;
+}
+
+ .openModalBtn {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  background-color: cornflowerblue;
+  color: white;
+  cursor: pointer;
+  
+}
+
+.add-user-button {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: right;
+  float: right;
+  flex-direction: column;
+  font-family: "Nunito", sans-serif;
 }

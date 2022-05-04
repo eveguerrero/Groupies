@@ -8,3 +8,25 @@
 
 User.create(username: "eve", password: "evehatessnowinapril", password_confirmation: "evehatessnowinapril")
 User.create(username: "ashley", password: "evehatessnowinapril", password_confirmation: "evehatessnowinapril")
+User.create(username: "Phil B", password: "evehatessnowinapril", password_confirmation: "evehatessnowinapril")
+User.create(username: "John K", password: "evehatessnowinapril", password_confirmation: "evehatessnowinapril")
+User.create(username: "RED", password: "evehatessnowinapril", password_confirmation: "evehatessnowinapril")
+User.create(username: "Jay", password: "evehatessnowinapril", password_confirmation: "evehatessnowinapril")
+User.create(username: "Cheese", password: "evehatessnowinapril", password_confirmation: "evehatessnowinapril")
+
+Group.create(name: "Friendz", description: "Life's all about the fun")
+Group.create(name: "Work-Budz", description: "",)
+Group.create(name: "Family", description: "")
+
+20.times do
+    UserGroup.create(group: Group.all.sample, user: User.all.sample)
+end
+
+# UserGroup.create(group_id: 1 , user_id: 1)
+# UserGroup.create(group_id: 2, user_id: 2)
+# UserGroup.create(group_id: 3, user_id: 3)
+# UserGroup.create(group_id: 3, user_id: 2)
+# UserGroup.create(group_id: 2, user_id: 1)
+# UserGroup.create(group_id: 3, user_id: 4)
+
+puts 'Done Seeding'

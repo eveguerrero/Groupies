@@ -7,14 +7,13 @@ import Profile from "./Profile"
 
 
 function NavBar({ user, setUser, setItemToEdit }) {
-  console.log(window.location.pathname)
   const history = useHistory();
   
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
-        history.push("/")
+        history.push("/login")
       }
     });
   }
@@ -22,9 +21,13 @@ function NavBar({ user, setUser, setItemToEdit }) {
  
 
   return (
+    
     <Wrapper>
+
+    
+      
       <Logo>
-        <Link to="/" exact>Groupies</Link>
+        <Link to="/home" exact>Groupies</Link>
       </Logo>
       <Nav>
 
@@ -36,8 +39,6 @@ function NavBar({ user, setUser, setItemToEdit }) {
         :
         (user) ?
         <>
-        {/* <Button as={Link} to="/itemform" exact>New Item</Button> */}
-        
         
           <Button variant="outline" onClick={handleLogoutClick}>
           Logout
@@ -49,6 +50,7 @@ function NavBar({ user, setUser, setItemToEdit }) {
         }
 
       </Nav>
+      
     </Wrapper>
   );
 }
@@ -61,24 +63,25 @@ const Wrapper = styled.header`
 `;
 
 const Logo = styled.h1`
-  font-family: 'Tapestry', cursive;
+  font-family: 'Copperplate';
   font-weight: lighter;
-  font-size: 4rem;
-  color: royalBlue;
+  font-size: 3rem;
+  color: pink;
   margin: 0;
   line-height: 1;
 
   a {
-    color: inherit;
+    color: hotpink;
     text-decoration: none;
   }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 4px;
+  gap: 25px;
   position: absolute;
   right: 8px;
 `;
+
 
 export default NavBar;

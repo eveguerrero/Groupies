@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 const COLORS = {
   primary: {
-    "--main": "MidnightBlue",
-    "--accent": "white",
+    "--main": "hotpink",
+    "--accent": "blue",
   },
   secondary: {
     "--main": "lavenderblush",
@@ -41,7 +41,7 @@ const FillButton = styled(ButtonBase)`
 `;
 
 const OutlineButton = styled(ButtonBase)`
-  background-color: white;
+  background-color: lightblue;
   color: var(--main);
   border: 2px solid var(--main);
 
