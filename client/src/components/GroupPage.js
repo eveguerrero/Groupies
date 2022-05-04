@@ -30,8 +30,8 @@ return (
     <h1>{group.name}</h1>
     <h4>Members:</h4>
     {/* {usernames} */}
-
-    <div className="add-user-button">
+<div>
+    <div className="new-group-button">
     <button
         className="openModalBtn"
         onClick={() => {
@@ -40,7 +40,7 @@ return (
       >
         add new member
       </button>
-
+      </div>
       {modalOpen && <Modal setOpenModal={setModalOpen} />}
     </div>
     </>
