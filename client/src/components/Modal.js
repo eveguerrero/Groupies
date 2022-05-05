@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Modal.css"
+import Select from 'react-select'
 
 
 function Modal ({ setOpenModal, setSearch, search, users, filteredUsers, setSelectedCategory }){
@@ -17,6 +18,12 @@ function Modal ({ setOpenModal, setSearch, search, users, filteredUsers, setSele
         setSelectedCategory(e.target.value)
     }
     filteredUsers.unshift('Users')
+
+    const options = [
+      { value: 'chocolate', label: 'Chocolate' },
+      { value: 'strawberry', label: 'Strawberry' },
+      { value: 'vanilla', label: 'Vanilla' }
+    ]
 return (
     
      <div className="modalBackground">
@@ -52,7 +59,7 @@ return (
           id='search'
           placeholder='Search User'
           onChange={handleSearch}/> */}
-          <select className="dropbtn" name="coffeelist" id="list" onChange={handleFilterChange}>
+          {/* <select className="dropbtn" name="coffeelist" id="list" onChange={handleFilterChange}>
             {
                 filteredUsers.map(u => {
                     return <option key={u.id} value={u.username}>{u.username}</option>
@@ -60,7 +67,9 @@ return (
                 })
             }
 
-        </select>
+        </select> */}
+        <Select options={options} />
+
           </form>
 </form>
             </div>

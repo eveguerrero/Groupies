@@ -14,26 +14,12 @@ function Home({user, setUser}){
     const [issueRequest] = useState(false)
     const [modalOpen, setModalOpen] = useState(false);
     
-    // function loadsGroups(){
-    //     fetch("/groups")
-    //       .then(r => r.json())
-    //       .then(groups => {
-    //         setGroups(groups)
-    //         console.log(groups)
-    //       })
-    //   }
     
-    //   useEffect(() => {
-    //     loadsGroups()
-    //   }, [issueRequest])
-    
-    //  const userGroups = groups.filter(group => group.users.username === user.username)
-    //  console.log(userGroups)
-     
+     console.log(user)
    
-    const group_elements = user.groups.map(group => {
-        return (<Group key={group.id} group={group}/>)
-      })
+    // const group_elements = user.groups.map(group => {
+    //     return (<Group key={group.id} group={group}/>)
+    //   })
 
 return (
     <>
@@ -45,7 +31,7 @@ return (
     <div className="group-list">
     <h1>My Groups</h1>
     
-    {group_elements}
+    {/* {group_elements} */}
     
     </div>
     <div>
