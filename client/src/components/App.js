@@ -64,7 +64,10 @@ function App() {
     setUser({ ...user, name: newName, bio: newBio});
   }
 
-  
+  function addGroup(newGroup) {
+    newGroup.id = groups.length + 1
+    setGroups([...groups, newGroup])
+  }
   
   if (!user) return <Login onLogin={setUser} />;
   return (
@@ -85,7 +88,7 @@ function App() {
             <ProfileSettings user={user} updateUser={updateUser} setUser={setUser}/>
             </Route>
             <Route path="/home">
-            <Home user={user} updateUser={updateUser} setUser={setUser}/>
+            <Home user={user} updateUser={updateUser} setUser={setUser} addGroup={addGroup}/>
             </Route>
             <Route path="/groups/:id">
             <GroupPage user={user} updateUser={updateUser} setUser={setUser} users={users}/>

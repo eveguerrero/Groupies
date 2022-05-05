@@ -6,9 +6,9 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 // import Button from "@mui/material/Button";
 import { Button } from "../styles";
-import NewMemberModal from "./NewMemberModal"
+import NewGroupModal from "./NewGroupModal"
 
-function Home({user, setUser}){
+function Home({user, setUser, addGroup}){
 
     const [groups, setGroups] = useState([]);
     const [issueRequest] = useState(false)
@@ -43,7 +43,7 @@ return (
       >
         create new group</Button> 
     </div>
-    {modalOpen && <NewMemberModal setOpenModal={setModalOpen} />}
+    {modalOpen && <NewGroupModal setOpenModal={setModalOpen} addGroup={addGroup}/>}
     </div>
     </>
 )

@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import "./Modal.css"
-function NewMemberModal ({ setOpenModal }){
+function NewGroupModal ({ setOpenModal, addGroup }){
     const [name, setName] = useState("")
 // New group name
-    function handleSubmit(){
+function handleNewGroup(e) {
+  e.preventDefault()
+  const newGroup = {
+    name: name,
+  }
 
-    }
+  fetch(`/groups`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newGroup)
+  });
+
+  setName('');
+  addGroup(newGroup);
+}
     
 return (
     
@@ -21,8 +36,8 @@ return (
           </button>
         </div>
         <div>
-<form>
-<form onSubmit={handleSubmit} 
+
+<form onSubmit={handleNewGroup} 
         style={{
           display: "flex",
           flexDirection: "column",
@@ -35,13 +50,7 @@ return (
           id="name" value={name} 
           onChange={(e) => setName(e.target.value)}/>
   
-          
-           
-        </form>
-</form>
-            </div>
-       
-        <div className="footer">
+  <div className="footer">
         <button>Submit</button>
           {/* <button
             onClick={() => {
@@ -53,9 +62,15 @@ return (
           </button> */}
           
         </div>
+           
+        </form>
+
+            </div>
+       
+       
       </div>
     </div>
 )
 }
 
-export default NewMemberModal;
+export default NewGroupModal;
