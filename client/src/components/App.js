@@ -16,18 +16,15 @@ import './App.css';
 
 
 function App() {
-
-  const [user, setUser] = useState("");
-  
+  const [user, setUser] = useState([]);
   const [errors, setErrors] = useState([])
-
   const history = useHistory()
-
+  const [users, setUsers] = useState([])
   const [groups, setGroups] = useState([])
   const [issueRequest] = useState(false)
   // console.log(selectedCauses)
 
-  useEffect(() => {
+  function loadMe(){
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
@@ -35,7 +32,7 @@ function App() {
       }
     }
     );
-  }, []);
+  }
   
   function loadsGroups(){
     fetch("/groups")
@@ -46,8 +43,19 @@ function App() {
       })
   }
 
+  function loadUsers(){
+    fetch("/users")
+      .then(r => r.json())
+      .then(users => {
+        setUsers(users)
+        console.log(groups)
+      })
+  }
+
   useEffect(() => {
     loadsGroups()
+    loadMe()
+    loadUsers()
   }, [issueRequest])
 
   
@@ -80,7 +88,7 @@ function App() {
             <Home user={user} updateUser={updateUser} setUser={setUser}/>
             </Route>
             <Route path="/groups/:id">
-            <GroupPage user={user} updateUser={updateUser} setUser={setUser}/>
+            <GroupPage user={user} updateUser={updateUser} setUser={setUser} users={users}/>
             </Route>
 
           </Switch>

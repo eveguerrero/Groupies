@@ -3,9 +3,25 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../styles";
 import Modal from "./Modal"
 import "./Modal.css"
-function GroupPage({user}){
+function GroupPage({user, users}){
     const [group, setGroup] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
+    const [search, setSearch] = useState('')
+    const [selectedCategory, setSelectedCategory]= useState('All')
+
+    const filteredUsers = users.filter((u) => {
+            if (selectedCategory === 'All') {
+                return true
+            }
+            else {
+                return u.username === selectedCategory;
+            }
+        })
+      .filter((u)=>{
+        return u.username.toLowerCase().includes(search.toLowerCase());
+    })
+
+    
 
     function LoadGroup(id) {
       fetch(`/groups/${id}`)
@@ -41,7 +57,7 @@ return (
         add new member
       </button>
       </div>
-      {modalOpen && <Modal setOpenModal={setModalOpen} />}
+    {modalOpen && <Modal setOpenModal={setModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
     </div>
     </>
 )
