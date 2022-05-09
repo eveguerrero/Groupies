@@ -5,7 +5,7 @@ import Modal from "./Modal"
 import "./Modal.css"
 import MembersList from "./MembersList"
 import PostEventModal from "./PostEventModal"
-function GroupPage({user, users}){
+function GroupPage({user, users, events, setEvents}){
     const [group, setGroup] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
     const [search, setSearch] = useState('')
@@ -29,14 +29,15 @@ function GroupPage({user, users}){
       fetch(`/groups/${id}`)
         .then(r => r.json())
         .then(group => {
-            console.log(group)
+             console.log(group)
           setGroup(group);
+          
         })
     }
-  
+   const usersList = group.users
     const data = useParams()
-    console.log("params:",data)
-    console.log("windows",window.location.pathname)
+    // console.log("params:",data)
+    // console.log("windows",window.location.pathname)
 
     useEffect(() => {
       LoadGroup(data.id);
@@ -48,12 +49,9 @@ return (
     <>
     <h1>{group.name}</h1>
     <h4>Members:</h4>
-    {/* { group.users.map(u => <li> {u.username} </li>) */}
-{/* <ul>
-    {group.users.map((u) => (
-                    <MembersList name={u.username} key={u.id} />
-                ))}
-</ul> */}
+    { usersList && group.users.map(u => <li key={u.id}> {u.username} </li>)}
+
+
 <div className="events">
   <h2>Events</h2>
 </div>
@@ -70,7 +68,7 @@ return (
       <br></br>
       <br></br>
       </div>
-    {modalOpen && <PostEventModal setOpenModal={setModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
+    {modalOpen && <PostEventModal setOpenModal={setModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch} group={group} events={events} setEvents={setEvents}/>}
     
    
     </div>
@@ -91,7 +89,7 @@ return (
       <br></br>
       <br></br>
       </div>
-    {memberModalOpen && <Modal setMemberModalOpen={setMemberModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
+    {memberModalOpen && <Modal setMemberModalOpen={setMemberModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch} group={group}/>}
     
    
     </div>

@@ -22,7 +22,7 @@ function App() {
   const [users, setUsers] = useState([])
   const [groups, setGroups] = useState([])
   const [issueRequest] = useState(false)
-  
+  const [events, setEvents] = useState([])
   // console.log(selectedCauses)
 
 
@@ -50,6 +50,15 @@ function App() {
       if (r.ok) {
         r.json().then((users) => {
         setUsers(users)
+        });
+      }
+    }
+    );
+
+    fetch("/events").then((r) => {
+      if (r.ok) {
+        r.json().then((events) => {
+        setEvents(events)
         });
       }
     }
@@ -98,7 +107,7 @@ function App() {
             <Home user={user} updateUser={updateUser} setUser={setUser} addGroup={addGroup}/>
             </Route>
             <Route path="/groups/:id">
-            <GroupPage user={user} updateUser={updateUser} setUser={setUser} users={users}/>
+            <GroupPage user={user} updateUser={updateUser} setUser={setUser} users={users} events={events} setEvents={setEvents}/>
             </Route>
 
           </Switch>

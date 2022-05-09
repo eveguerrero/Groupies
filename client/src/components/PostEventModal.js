@@ -6,13 +6,19 @@ import "./Modal.css"
 import MembersList from "./MembersList"
 
 
-function PostEventModal ({ setOpenModal, group, addEvent}){
+function PostEventModal ({ setOpenModal, group, addEvent, events, setEvents}){
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [starttime, setStartTime] = useState('')
   const [endtime, setEndTime] = useState('')
   const [image, setImage] = useState('')
  // :name, :description, :start_time, :endtime, :group_id, :image
+
+ function addEvent(newEvent) {
+  newEvent.id = events.length + 1
+  setEvents([...events, newEvent])
+}
+
   function handleNewEvent(e) {
       e.preventDefault()
       const newEvent = {
@@ -24,7 +30,7 @@ function PostEventModal ({ setOpenModal, group, addEvent}){
         group_id : group.id
       }
 
-      fetch(``, {
+      fetch(`/events`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -63,11 +69,11 @@ return (
               setDescription(e.target.value)
               }}
           />
-           <input type="text" name="starttime" placeholder="start time..." value={description} onChange={(e)=>{
+           <input type="datetime-local" name="starttime" placeholder="start time..." value={starttime} onChange={(e)=>{
               setStartTime(e.target.value)
               }}
           />
-           <input type="text" name="endtime" placeholder="end time..." value={description} onChange={(e)=>{
+           <input type="datetime-local" name="endtime" placeholder="end time..." value={endtime} onChange={(e)=>{
               setEndTime(e.target.value)
               }}
           />
@@ -75,13 +81,13 @@ return (
               setImage(e.target.value)
               }}
           />
-         
+          <button>Submit</button>
       </form>
 
             </div>
        
         <div className="footer">
-        <button>Submit</button>
+       
           <button
             onClick={() => {
               setOpenModal(false);

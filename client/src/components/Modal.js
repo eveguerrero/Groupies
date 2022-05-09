@@ -1,11 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import "./Modal.css"
 import Select from 'react-select'
+import { Link, useHistory, useParams } from "react-router-dom";
 
-
-function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, setSelectedCategory }){
+function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, setSelectedCategory, group}){
     const [name, setName] = useState("")
+    
+    function LoadGroup(id) {
+      let dropdown = document.getElementById('locality-dropdown');
+       dropdown.length = 0;
 
+      fetch(`/groups/${id}`)
+        .then(  
+        function(response) {  
+          if (response.status !== 200) {  
+            console.warn('Looks like there was a problem. Status Code: ' + 
+              response.status);  
+            return;  
+          }
+    
+          // Examine the text in the response  
+          response.json().then(function(data) {  
+            let option;
+        
+          for (let i = 0; i < data.length; i++) {
+              option = document.createElement('option');
+              option.text = data[i].name;
+              option.value = data[i].abbreviation;
+              dropdown.add(option);
+          }    
+          });  
+        }
+      )
+    }
+  
+   const usersList = group.users
+    const data = useParams()
+    // console.log("params:",data)
+    // console.log("windows",window.location.pathname)
+
+    useEffect(() => {
+      LoadGroup(data.id);
+    }, [data]);
+    
+    
     function handleSubmit(){
 
     }
@@ -19,11 +57,19 @@ function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, s
     }
     filteredUsers.unshift('Users')
 
-    const options = [
-      { value: 'chocolate', label: 'Chocolate' },
-      { value: 'strawberry', label: 'Strawberry' },
-      { value: 'vanilla', label: 'Vanilla' }
-    ]
+    // const options = [
+    //   { value: 'chocolate', label: 'Chocolate' },
+    //   { value: 'strawberry', label: 'Strawberry' },
+    //   { value: 'vanilla', label: 'Vanilla' }
+
+
+    // ]
+
+    // const options = group.users.map( u => ({ value: u.id, label: u.username }));
+    // return { options };
+  
+   // console.log(options)
+    console.log(group)
 return (
     
      <div className="modalBackground">
@@ -68,7 +114,7 @@ return (
             }
 
         </select> */}
-        <Select options={options} />
+       <Select id="locality-dropdown" name="locality"/>
 
           </form>
 </form>
