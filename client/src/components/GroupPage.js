@@ -4,12 +4,13 @@ import { Button } from "../styles";
 import Modal from "./Modal"
 import "./Modal.css"
 import MembersList from "./MembersList"
+import PostEventModal from "./PostEventModal"
 function GroupPage({user, users}){
     const [group, setGroup] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
     const [search, setSearch] = useState('')
     const [selectedCategory, setSelectedCategory]= useState('All')
-
+    const [memberModalOpen, setMemberModalOpen] = useState(false)
     const filteredUsers = users.filter((u) => {
             if (selectedCategory === 'All') {
                 return true
@@ -69,7 +70,7 @@ return (
       <br></br>
       <br></br>
       </div>
-    {modalOpen && <Modal setOpenModal={setModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
+    {modalOpen && <PostEventModal setOpenModal={setModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
     
    
     </div>
@@ -82,7 +83,7 @@ return (
     <button
         className="openModalBtn"
         onClick={() => {
-          setModalOpen(true);
+          setMemberModalOpen(true);
         }}
       >
         add new member
@@ -90,7 +91,7 @@ return (
       <br></br>
       <br></br>
       </div>
-    {modalOpen && <Modal setOpenModal={setModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
+    {memberModalOpen && <Modal setMemberModalOpen={setMemberModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
     
    
     </div>

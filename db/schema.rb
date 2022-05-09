@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2022_04_27_154136) do
     t.datetime "starttime"
     t.datetime "endtime"
     t.integer "group_id"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

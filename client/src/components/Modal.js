@@ -3,7 +3,7 @@ import "./Modal.css"
 import Select from 'react-select'
 
 
-function Modal ({ setOpenModal, setSearch, search, users, filteredUsers, setSelectedCategory }){
+function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, setSelectedCategory }){
     const [name, setName] = useState("")
 
     function handleSubmit(){
@@ -31,7 +31,7 @@ return (
         <div className="titleCloseBtn">
           <button
             onClick={() => {
-              setOpenModal(false);
+              setMemberModalOpen(false);
             }}
           >
             X
@@ -78,7 +78,7 @@ return (
         <button>Submit</button>
           <button
             onClick={() => {
-              setOpenModal(false);
+              setMemberModalOpen(false);
             }}
             id="cancelBtn"
           >

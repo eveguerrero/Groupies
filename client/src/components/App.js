@@ -22,6 +22,7 @@ function App() {
   const [users, setUsers] = useState([])
   const [groups, setGroups] = useState([])
   const [issueRequest] = useState(false)
+  
   // console.log(selectedCauses)
 
 
@@ -34,7 +35,7 @@ function App() {
     }
     );
     // fetch items
-    fetch("groups").then((r) => {
+    fetch("/groups").then((r) => {
       if (r.ok) {
         r.json().then((groups) => {
         setGroups(groups)
@@ -73,6 +74,7 @@ function App() {
     newGroup.id = groups.length + 1
     setGroups([...groups, newGroup])
   }
+
   
   if (!user) return <Login onLogin={setUser} />;
   return (
