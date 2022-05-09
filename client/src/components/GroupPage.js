@@ -5,6 +5,8 @@ import Modal from "./Modal"
 import "./Modal.css"
 import MembersList from "./MembersList"
 import PostEventModal from "./PostEventModal"
+import CalendarItem from "./CalendarItem"
+
 function GroupPage({user, users, events, setEvents}){
     const [group, setGroup] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
@@ -93,6 +95,9 @@ return (
     
    
     </div>
+    </div>
+    <div>
+<CalendarItem />
     </div>
     </>
 )
