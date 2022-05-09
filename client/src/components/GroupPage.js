@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../styles";
 import Modal from "./Modal"
 import "./Modal.css"
+import MembersList from "./MembersList"
 function GroupPage({user, users}){
     const [group, setGroup] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
@@ -35,6 +36,7 @@ function GroupPage({user, users}){
     const data = useParams()
     console.log("params:",data)
     console.log("windows",window.location.pathname)
+
     useEffect(() => {
       LoadGroup(data.id);
     }, [data]);
@@ -45,7 +47,15 @@ return (
     <>
     <h1>{group.name}</h1>
     <h4>Members:</h4>
-    {/* {usernames} */}
+    {/* { group.users.map(u => <li> {u.username} </li>) */}
+{/* <ul>
+    {group.users.map((u) => (
+                    <MembersList name={u.username} key={u.id} />
+                ))}
+</ul> */}
+<div className="events">
+  <h2>Events</h2>
+</div>
 <div>
     <div className="new-group-button">
     <button
@@ -54,10 +64,36 @@ return (
           setModalOpen(true);
         }}
       >
-        add new member
+        PostEvent
       </button>
+      <br></br>
+      <br></br>
       </div>
     {modalOpen && <Modal setOpenModal={setModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
+    
+   
+    </div>
+    <br></br>
+    
+   
+    <div>
+    <div>
+    <div className="">
+    <button
+        className="openModalBtn"
+        onClick={() => {
+          setModalOpen(true);
+        }}
+      >
+        add new member
+      </button>
+      <br></br>
+      <br></br>
+      </div>
+    {modalOpen && <Modal setOpenModal={setModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch}/>}
+    
+   
+    </div>
     </div>
     </>
 )

@@ -17,9 +17,9 @@ function Home({user, setUser, addGroup}){
     
      console.log(user)
    
-    // const group_elements = user.groups.map(group => {
-    //     return (<Group key={group.id} group={group}/>)
-    //   })
+    const group_elements = user.groups.map(g => {
+        return (<Group key={g.id} group={g}/>)
+      })
 
 return (
     <>
@@ -31,7 +31,7 @@ return (
     <div className="group-list">
     <h1>My Groups</h1>
     
-    {/* {group_elements} */}
+    {group_elements}
     
     </div>
     <div>

@@ -16,7 +16,7 @@ import './App.css';
 
 
 function App() {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   const [errors, setErrors] = useState([])
   const history = useHistory()
   const [users, setUsers] = useState([])
@@ -24,7 +24,8 @@ function App() {
   const [issueRequest] = useState(false)
   // console.log(selectedCauses)
 
-  function loadMe(){
+
+  useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
@@ -32,31 +33,35 @@ function App() {
       }
     }
     );
-  }
-  
-  function loadsGroups(){
-    fetch("/groups")
-      .then(r => r.json())
-      .then(groups => {
+    // fetch items
+    fetch("groups").then((r) => {
+      if (r.ok) {
+        r.json().then((groups) => {
         setGroups(groups)
         console.log(groups)
-      })
-  }
+        });
+      }
+    }
+    );
 
-  function loadUsers(){
-    fetch("/users")
-      .then(r => r.json())
-      .then(users => {
+    // fetch causes
+    fetch("/users").then((r) => {
+      if (r.ok) {
+        r.json().then((users) => {
         setUsers(users)
-        console.log(groups)
-      })
-  }
+        });
+      }
+    }
+    );
+  }, []);
 
-  useEffect(() => {
-    loadsGroups()
-    loadMe()
-    loadUsers()
-  }, [issueRequest])
+
+
+  
+  
+  
+
+ 
 
   
   
