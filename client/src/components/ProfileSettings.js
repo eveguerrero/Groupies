@@ -25,12 +25,6 @@ function ProfileSettings({user, updateUser, setUser}){
               setErrors(["User was updated successfully"]);
               setTimeout(() => setErrors([]), 1500);
               
-              // fetch("/me").then((r) => {
-              //   if (r.ok) {
-              //     r.json().then((user) => setUser(user));
-              //   }
-              // }
-              // )
              
             });
           } else r.json().then((data) => setErrors(data.errors));
@@ -40,12 +34,7 @@ function ProfileSettings({user, updateUser, setUser}){
       }
         
       
-        // auto-login
-       
-        // function updateImage(newImage) {
-        //   setImage({ ...user, image: newImage});
-        // }
-      
+        
       
 
       function handleImageSubmit(e){

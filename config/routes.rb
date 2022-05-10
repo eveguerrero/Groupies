@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show, :create, :update, :destroy]
   resources :comments, only: [:index, :show, :create, :update, :destroy]
   resources :posts, only: [:index, :show, :create, :update, :destroy]
+  resources :user_groups, only: [:index, :show, :create, :update, :destroy]
    
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

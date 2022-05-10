@@ -97,3 +97,24 @@
   align-items: center;
 }
 
+.post-button-link {
+  align-items: right;
+  float: right;
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  background-color: coral;
+  color: white;
+  cursor: pointer;
+}
+
+.calendar-button-link {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e5989b;
+  color: white;
+  cursor: pointer;
+}

@@ -2,51 +2,40 @@ import React, { useState, useEffect} from "react";
 import "./Modal.css"
 import Select from 'react-select'
 import { Link, useHistory, useParams } from "react-router-dom";
+import { render } from 'react-dom';
 
-function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, setSelectedCategory, group}){
+function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, setSelectedCategory, group, addMember}){
     const [name, setName] = useState("")
+    const [userID, setUserID] = useState()
+    const [groupID, setGroupID] = useState()
+    const [selectedOptions, setSelectedOptions] = useState([])
     
-    function LoadGroup(id) {
-      let dropdown = document.getElementById('locality-dropdown');
-       dropdown.length = 0;
-
-      fetch(`/groups/${id}`)
-        .then(  
-        function(response) {  
-          if (response.status !== 200) {  
-            console.warn('Looks like there was a problem. Status Code: ' + 
-              response.status);  
-            return;  
-          }
-    
-          // Examine the text in the response  
-          response.json().then(function(data) {  
-            let option;
-        
-          for (let i = 0; i < data.length; i++) {
-              option = document.createElement('option');
-              option.text = data[i].name;
-              option.value = data[i].abbreviation;
-              dropdown.add(option);
-          }    
-          });  
-        }
-      )
-    }
   
-   const usersList = group.users
-    const data = useParams()
-    // console.log("params:",data)
-    // console.log("windows",window.location.pathname)
-
-    useEffect(() => {
-      LoadGroup(data.id);
-    }, [data]);
+   const usersList = users
+   console.log(usersList)
     
-    
-    function handleSubmit(){
-
+   function handleNewMember(e) {
+    e.preventDefault()
+    const newMember = {
+      user_id:   userID,
+      group_id: group.id
     }
+    fetch(`/usergroups`, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newMember)
+        });
+
+        setUserID('');
+        setGroupID('');
+        
+        addMember(newMember);
+    }
+    
+    
     function handleSearch(e){
         
         setSearch(e.target.value)
@@ -55,21 +44,15 @@ function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, s
         e.preventDefault()
         setSelectedCategory(e.target.value)
     }
-    filteredUsers.unshift('Users')
-
-    // const options = [
-    //   { value: 'chocolate', label: 'Chocolate' },
-    //   { value: 'strawberry', label: 'Strawberry' },
-    //   { value: 'vanilla', label: 'Vanilla' }
-
-
-    // ]
-
-    // const options = group.users.map( u => ({ value: u.id, label: u.username }));
-    // return { options };
-  
-   // console.log(options)
-    console.log(group)
+    
+    const options = usersList.map(d => ({
+      "value" : d.id,
+      "label" : d.username
+    }))
+   
+    
+    
+    
 return (
     
      <div className="modalBackground">
@@ -85,7 +68,7 @@ return (
         </div>
         <div>
 <form>
-<form onSubmit={handleSubmit} 
+<form onSubmit={handleNewMember} 
         style={{
           display: "flex",
           flexDirection: "column",
@@ -97,31 +80,30 @@ return (
           type="text" 
           id="name"  
           onChange={handleSearch}
-          onChange={(e) => setName(e.target.value)}/>
-          
-  {/* <input
-          style={{width:'200px'}}
-          type='text'
-          id='search'
-          placeholder='Search User'
-          onChange={handleSearch}/> */}
-          {/* <select className="dropbtn" name="coffeelist" id="list" onChange={handleFilterChange}>
-            {
-                filteredUsers.map(u => {
-                    return <option key={u.id} value={u.username}>{u.username}</option>
-                    // <ListItem key={item.id} item={item} />
-                })
-            }
-
-        </select> */}
-       <Select id="locality-dropdown" name="locality"/>
-
+          // onChange={(e) => {
+          //     setUserID(e.target.value.id)
+          //     console.log(e.target.value)
+          //   }
+          // }
+        />
+       <Select options={options}
+       isMulti
+      //  value={}
+      //  onChange={this.handleChange}
+       options={options}
+       onChange={(e) => {
+        setUserID(e.target)
+        console.log(e.target)
+       }
+      }
+      />
+       <button>Submit</button>
           </form>
 </form>
             </div>
        
         <div className="footer">
-        <button>Submit</button>
+       
           <button
             onClick={() => {
               setMemberModalOpen(false);
@@ -134,7 +116,8 @@ return (
         </div>
       </div>
     </div>
-)
+);
 }
+
 
 export default Modal;

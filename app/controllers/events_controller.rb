@@ -7,8 +7,10 @@ class EventsController < ApplicationController
         event = Event.find(params[:id])
         render json: event, status: :ok
     end
-
     def create 
+        p event_params
+        p '*'*50
+        
         event = Event.create!(event_params)
         render json: event, status: :created 
         

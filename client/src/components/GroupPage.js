@@ -7,7 +7,7 @@ import MembersList from "./MembersList"
 import PostEventModal from "./PostEventModal"
 import CalendarItem from "./CalendarItem"
 
-function GroupPage({user, users, events, setEvents}){
+function GroupPage({user, users, events, setEvents, addMember}){
     const [group, setGroup] = useState([])
     const [modalOpen, setModalOpen] = useState(false);
     const [search, setSearch] = useState('')
@@ -90,14 +90,18 @@ return (
       </button>
       <br></br>
       <br></br>
+      <button className="post-button-link"><Link to="/posts-page" exact>Posts</Link></button>
+      <br></br>
+      <br></br>
+      <button className="calendar-button-link"><Link to="/calendar" exact>Calendar</Link></button>
       </div>
-    {memberModalOpen && <Modal setMemberModalOpen={setMemberModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch} group={group}/>}
+    {memberModalOpen && <Modal setMemberModalOpen={setMemberModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch} group={group} addMember={addMember}/>}
     
    
     </div>
     </div>
     <div>
-<CalendarItem />
+
     </div>
     </>
 )

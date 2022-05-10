@@ -8,7 +8,8 @@ import ProfileSettings from "./ProfileSettings";
 import Home from "./Home";
 import './App.css';
 import GroupPage from "./GroupPage";
-
+import CalendarItem from "./CalendarItem";
+import PostsPage from "./PostsPage";
 
 
 import './App.css';
@@ -23,6 +24,7 @@ function App() {
   const [groups, setGroups] = useState([])
   const [issueRequest] = useState(false)
   const [events, setEvents] = useState([])
+  const [userGroups, setUserGroups] = useState([])
   // console.log(selectedCauses)
 
 
@@ -63,6 +65,15 @@ function App() {
       }
     }
     );
+
+    fetch("/user_groups").then((r) => {
+      if (r.ok) {
+        r.json().then((usergroups) => {
+        setUserGroups(usergroups)
+        });
+      }
+    }
+    );
   }, []);
 
 
@@ -82,6 +93,11 @@ function App() {
   function addGroup(newGroup) {
     newGroup.id = groups.length + 1
     setGroups([...groups, newGroup])
+  }
+
+  function addMember(newMember) {
+    newMember.id = userGroups.length + 1
+    setUserGroups([...userGroups, newMember])
   }
 
   
@@ -107,7 +123,13 @@ function App() {
             <Home user={user} updateUser={updateUser} setUser={setUser} addGroup={addGroup}/>
             </Route>
             <Route path="/groups/:id">
-            <GroupPage user={user} updateUser={updateUser} setUser={setUser} users={users} events={events} setEvents={setEvents}/>
+            <GroupPage user={user} updateUser={updateUser} setUser={setUser} users={users} events={events} setEvents={setEvents} addMember={addMember}/>
+            </Route>
+            <Route path="/calendar">
+            <CalendarItem />
+            </Route>
+            <Route path="/posts-page">
+            <PostsPage />
             </Route>
 
           </Switch>
