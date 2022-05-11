@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 2022_04_27_154136) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.string "description"
-    t.datetime "starttime"
-    t.datetime "endtime"
+    t.datetime "start"
+    t.datetime "end"
     t.integer "group_id"
     t.string "image"
     t.datetime "created_at", precision: 6, null: false

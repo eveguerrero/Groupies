@@ -118,3 +118,8 @@
   color: white;
   cursor: pointer;
 }
+
+.profile-settings {
+  text-align: center;
+  align-items: center;
+}

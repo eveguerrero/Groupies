@@ -15,7 +15,7 @@ function Home({user, setUser, addGroup}){
     const [modalOpen, setModalOpen] = useState(false);
     
     
-     console.log(user)
+     //console.log(user)
    
     const group_elements = user.groups.map(g => {
         return (<Group key={g.id} group={g}/>)
@@ -23,7 +23,7 @@ function Home({user, setUser, addGroup}){
 
 return (
     <>
-    <img src={user.image} alt="Avatar" className="avatar" />
+    {/* <img src={user.image} alt="Avatar" className="avatar" /> */}
     <br></br>
     <br></br>
    
@@ -43,7 +43,7 @@ return (
       >
         create new group</Button> 
     </div>
-    {modalOpen && <NewGroupModal setOpenModal={setModalOpen} addGroup={addGroup}/>}
+    {modalOpen && <NewGroupModal setOpenModal={setModalOpen} addGroup={addGroup} user={user}/>}
     </div>
     </>
 )

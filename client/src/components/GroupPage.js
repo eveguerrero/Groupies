@@ -6,6 +6,7 @@ import "./Modal.css"
 import MembersList from "./MembersList"
 import PostEventModal from "./PostEventModal"
 import CalendarItem from "./CalendarItem"
+import EventItem from "./EventItem"
 
 function GroupPage({user, users, events, setEvents, addMember}){
     const [group, setGroup] = useState([])
@@ -40,7 +41,9 @@ function GroupPage({user, users, events, setEvents, addMember}){
     const data = useParams()
     // console.log("params:",data)
     // console.log("windows",window.location.pathname)
-
+    const eventsList = group.events
+    console.log(eventsList)
+    console.log(group)
     useEffect(() => {
       LoadGroup(data.id);
     }, [data]);
@@ -51,11 +54,16 @@ return (
     <>
     <h1>{group.name}</h1>
     <h4>Members:</h4>
-    { usersList && group.users.map(u => <li key={u.id}> {u.username} </li>)}
-
+    
+    { usersList && group.users.map(u => <ul key={u.id}> {u.username} </ul>)}
+    
 
 <div className="events">
   <h2>Events</h2>
+{eventsList && group.events.map(e => {
+        return (<EventItem key={e.id} event={e}/>)
+      })
+}
 </div>
 <div>
     <div className="new-group-button">

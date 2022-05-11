@@ -21,7 +21,7 @@ function NavBar({ user, setUser, setItemToEdit }) {
  
 
   return (
-    
+    <>
     <Wrapper>
 
     
@@ -50,8 +50,10 @@ function NavBar({ user, setUser, setItemToEdit }) {
         }
 
       </Nav>
-      
+     
     </Wrapper>
+    <img src={user.image} alt="Avatar" className="avatar" />
+    </>
   );
 }
 

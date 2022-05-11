@@ -14,10 +14,10 @@ return (
   <br></br>
   <br></br>
   <Button as={Link} to="/profilesettings" exact>Profile Settings</Button> 
-  
+  <div className="profile-settings">
   <p>{user.name}</p>
   <p>{user.bio}</p>
-
+  </div>
   </>
 )
 }

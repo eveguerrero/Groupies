@@ -24,12 +24,12 @@ function PostEventModal ({ setOpenModal, group, addEvent, events, setEvents}){
       const newEvent = {
         name: name,
         description: description,
-        starttime: starttime,
-        endtime: endtime,
+        start: starttime,
+        end: endtime,
         image: image,
         group_id : group.id
       }
-
+      console.log(newEvent)
       fetch(`/events`, {
         method: 'POST',
         headers: {
@@ -77,14 +77,10 @@ return (
               setEndTime(e.target.value)
               }}
           />
-          <input type="file" name="image"  accept="image/*" placeholder="new image..." value={image} onChange={(e)=>{
-              setImage(e.target.files[0])
+          <input type="text" name="image" placeholder="new image..." value={image} onChange={(e)=>{
+              setImage(e.target.value)
               }}
           />
-          {/* <input
-              type="file"
-              accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
-          <input type='submit'/> */}
           <button>Submit</button>
       </form>
 

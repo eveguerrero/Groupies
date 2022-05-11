@@ -38,6 +38,7 @@ function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, s
         setGroupID('');
         
         addMember(newMember);
+        setMemberModalOpen(false)
     }
     
     
@@ -63,11 +64,13 @@ function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, s
     setUserID(e.value);
 
     setSelectedValue(e.value);
+   
   };
 
   const onSubmit = (formData, event) => {
      console.log("Form Data: ", formData)
      console.log("Selected Options: ", selectedValue)
+     setMemberModalOpen(false)
   }
     
     
