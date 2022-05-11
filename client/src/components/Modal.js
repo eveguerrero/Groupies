@@ -3,13 +3,16 @@ import "./Modal.css"
 import Select from 'react-select'
 import { Link, useHistory, useParams } from "react-router-dom";
 import { render } from 'react-dom';
+import { useForm } from 'react-hook-form';
+
+
 
 function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, setSelectedCategory, group, addMember}){
     const [name, setName] = useState("")
     const [userID, setUserID] = useState()
     const [groupID, setGroupID] = useState()
-    const [selectedOptions, setSelectedOptions] = useState([])
-    
+    // const [selectedValue, setselectedValue] = useState([])
+    const { handleSubmit } = useForm();
   
    const usersList = users
    console.log(usersList)
@@ -19,8 +22,10 @@ function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, s
     const newMember = {
       user_id:   userID,
       group_id: group.id
+
     }
-    fetch(`/usergroups`, {
+    console.log('new  Member:', newMember)
+    fetch(`/user_groups`, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -43,6 +48,7 @@ function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, s
     function handleFilterChange(e){
         e.preventDefault()
         setSelectedCategory(e.target.value)
+        setUserID(e.target.value.id)
     }
     
     const options = usersList.map(d => ({
@@ -50,6 +56,20 @@ function Modal ({ setMemberModalOpen, setSearch, search, users, filteredUsers, s
       "label" : d.username
     }))
    
+    const [selectedValue, setSelectedValue] = useState([]);
+
+  const handleChange = (e) => {
+    console.log(e.value)
+    setUserID(e.value);
+
+    setSelectedValue(e.value);
+  };
+
+  const onSubmit = (formData, event) => {
+     console.log("Form Data: ", formData)
+     console.log("Selected Options: ", selectedValue)
+  }
+    
     
     
     
@@ -67,7 +87,7 @@ return (
           </button>
         </div>
         <div>
-<form>
+
 <form onSubmit={handleNewMember} 
         style={{
           display: "flex",
@@ -86,20 +106,17 @@ return (
           //   }
           // }
         />
-       <Select options={options}
-       isMulti
-      //  value={}
-      //  onChange={this.handleChange}
-       options={options}
-       onChange={(e) => {
-        setUserID(e.target)
-        console.log(e.target)
-       }
-      }
-      />
-       <button>Submit</button>
+       <Select
+          // isMulti = {true}
+          options={options}
+          closeMenuOnSelect={false}
+          value={options.find(obj => obj.value === selectedValue)}
+          onChange={handleChange}/>
+
+     <button type="submit">Save</button>
+       
           </form>
-</form>
+
             </div>
        
         <div className="footer">
