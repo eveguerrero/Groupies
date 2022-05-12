@@ -60,10 +60,7 @@ return (
 
 <div className="events">
   <h2>Events</h2>
-{eventsList && group.events.map(e => {
-        return (<EventItem key={e.id} event={e}/>)
-      })
-}
+
 </div>
 <div>
     <div className="new-group-button">
@@ -108,8 +105,11 @@ return (
    
     </div>
     </div>
-    <div>
-
+    <div className='events-lists'>
+    {eventsList && group.events.map(e => {
+        return (<EventItem key={e.id} event={e}/>)
+      })
+}
     </div>
     </>
 )

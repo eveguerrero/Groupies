@@ -9,6 +9,8 @@ function EventItem({event}){
        
        <h1>{event.title}</h1> 
        <h2>{event.description}</h2>
+       <h3>{event.start}</h3>
+       <h3>{event.end}</h3>
        </div>
 
        </>

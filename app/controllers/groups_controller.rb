@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
 
     def create 
         group = Group.create!(group_params)
+        UserGroup.create!(group_id: group.id, user_id: session[:user_id])
         render json: group, status: :created 
         
     

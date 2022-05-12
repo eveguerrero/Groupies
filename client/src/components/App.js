@@ -126,7 +126,7 @@ function App() {
             <GroupPage user={user} updateUser={updateUser} setUser={setUser} users={users} events={events} setEvents={setEvents} addMember={addMember}/>
             </Route>
             <Route path="/calendar">
-            <CalendarItem />
+            <CalendarItem groups={groups}/>
             </Route>
             <Route path="/posts-page">
             <PostsPage />

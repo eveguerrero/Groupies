@@ -20,22 +20,23 @@ const localizer = dateFnsLocalizer({
     locales,
 });
 
+
+
 const events = [
     {
         title: "Big Meeting",
-        allDay: true,
-        start: new Date(2021, 6, 0),
-        end: new Date(2021, 6, 0),
+        start: new Date(2022, 4, 2),
+        end: new Date(2022, 4, 3),
     },
     {
         title: "Vacation",
-        start: new Date(2021, 6, 7),
-        end: new Date(2021, 6, 10),
+        start: new Date(2022, 4, 7),
+        end: new Date(2022, 4, 10),
     },
     {
         title: "Conference",
-        start: new Date(2021, 6, 20),
-        end: new Date(2021, 6, 23),
+        start: new Date(2022, 4, 20),
+        end: new Date(2022, 4, 23),
     },
 ];
 function CalendarItem(){
@@ -43,6 +44,8 @@ function CalendarItem(){
     const [allEvents, setAllEvents] = useState(events);
 
     function handleAddEvent() {
+        console.log(newEvent);
+        console.log(allEvents);
         setAllEvents([...allEvents, newEvent]);
     }
 
