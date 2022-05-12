@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   delete '/users', to: 'users#destroy'
   get 'users/:id' , to: 'users#user_by_id'
   patch '/me' , to: 'users#update'
+  get '/groups/:id/events', to: 'events#find_by_group_id'
 
 end

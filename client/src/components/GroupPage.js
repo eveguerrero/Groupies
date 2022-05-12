@@ -42,12 +42,11 @@ function GroupPage({user, users, events, setEvents, addMember}){
     // console.log("params:",data)
     // console.log("windows",window.location.pathname)
     const eventsList = group.events
-    console.log(eventsList)
-    console.log(group)
+   
     useEffect(() => {
       LoadGroup(data.id);
     }, [data]);
-
+    console.log(data)
 // const usernames = group.users.map(user => <li> {user.username} </li>)
 
 return (
@@ -98,7 +97,7 @@ return (
       <button className="post-button-link"><Link to="/posts-page" exact>Posts</Link></button>
       <br></br>
       <br></br>
-      <button className="calendar-button-link"><Link to="/calendar" exact>Calendar</Link></button>
+      <button className="calendar-button-link"><Link to={`/groups/${data.id}/calendar`} exact>Calendar</Link></button>
       </div>
     {memberModalOpen && <Modal setMemberModalOpen={setMemberModalOpen} users={users} filteredUsers={filteredUsers} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} search={search} setSearch={setSearch} group={group} addMember={addMember}/>}
     

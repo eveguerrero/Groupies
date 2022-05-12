@@ -122,11 +122,11 @@ function App() {
             <Route path="/home">
             <Home user={user} updateUser={updateUser} setUser={setUser} addGroup={addGroup}/>
             </Route>
+            <Route path="/groups/:id/calendar">
+            <CalendarItem groups={groups}/>
+            </Route>
             <Route path="/groups/:id">
             <GroupPage user={user} updateUser={updateUser} setUser={setUser} users={users} events={events} setEvents={setEvents} addMember={addMember}/>
-            </Route>
-            <Route path="/calendar">
-            <CalendarItem groups={groups}/>
             </Route>
             <Route path="/posts-page">
             <PostsPage />

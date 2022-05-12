@@ -2,7 +2,8 @@ import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
-import React, { useState } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
@@ -22,30 +23,68 @@ const localizer = dateFnsLocalizer({
 
 
 
-const events = [
-    {
-        title: "Big Meeting",
-        start: new Date(2022, 4, 2),
-        end: new Date(2022, 4, 3),
-    },
-    {
-        title: "Vacation",
-        start: new Date(2022, 4, 7),
-        end: new Date(2022, 4, 10),
-    },
-    {
-        title: "Conference",
-        start: new Date(2022, 4, 20),
-        end: new Date(2022, 4, 23),
-    },
-];
-function CalendarItem(){
+// const events = [
+//     {
+//         title: "Big Meeting",
+//         start: new Date(2022, 4, 2),
+//         end: new Date(2022, 4, 3),
+//     },
+//     {
+//         title: "Vacation",
+//         start: new Date(2022, 4, 7),
+//         end: new Date(2022, 4, 10),
+//     },
+//     {
+//         title: "Conference",
+//         start: new Date(2022, 4, 20),
+//         end: new Date(2022, 4, 23),
+//     },
+// ];
+function CalendarItem({groups}){
+
+    const [group, setGroup] = useState([])
     const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
-    const [allEvents, setAllEvents] = useState(events);
+    const [allEvents, setAllEvents] = useState([]);
+    const [groupID, setGroupID] =([])
+    const [eventsData, setEventsData] = useState([]);
+
+    function LoadGroupByID(id) {
+        fetch(`/groups/${id}`)
+          .then(r => r.json())
+          .then(group => {
+            setGroup(group);
+            // setGroupID(group.id)
+          })
+      }
+      function LoadEventByID(ID) {
+        
+        fetch(`/groups/${ID}/events`)
+          .then(r => r.json())
+          .then(e => {
+            setEventsData(e);
+          })
+      }
+
+      
+    
+      const data = useParams()
+      useEffect(() => {
+          LoadGroupByID(data.id);
+          LoadEventByID(data.id);
+        }, [data]);
+        // const eventsList = eventsData;
+        
+        console.log(eventsData);
+     const events = eventsData.map(e => ({
+        "title" : e.title,
+        "start" : e.start,
+        "end" : e.end
+      }))
+
+
+       
 
     function handleAddEvent() {
-        console.log(newEvent);
-        console.log(allEvents);
         setAllEvents([...allEvents, newEvent]);
     }
 
@@ -61,7 +100,7 @@ function CalendarItem(){
                     Add Event
                 </button>
             </div>
-            <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 500, margin: "50px" }} />
+            <Calendar localizer={localizer} events={events} startAccessor="start" endAccessor="end" style={{ height: 500, margin: "50px" }} />
         </div>
     );
 }

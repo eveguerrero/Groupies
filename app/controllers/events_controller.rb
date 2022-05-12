@@ -3,6 +3,10 @@ class EventsController < ApplicationController
         render json: Event.all
     end
 
+    def find_by_group_id
+        render json: Event.where(group_id: params[:id]), status: :ok
+    end
+
     def show
         event = Event.find(params[:id])
         render json: event, status: :ok
